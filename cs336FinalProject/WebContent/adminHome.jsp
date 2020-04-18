@@ -39,10 +39,27 @@
 	%>
 		Best Customer: <%=bestCustomerResults.getObject("FirstName").toString() + " " + bestCustomerResults.getObject("LastName").toString() + " (" + bestCustomerResults.getObject("CustomerEmail").toString() + ")"%>
 	<%
+	
+		String topFiveLinesSQL = 
+			"SELECT r.name routeName, COUNT(m.tripId) reservations " +
+			"FROM Multivalue_Reservations_Trips m " +
+			"INNER JOIN Trips t ON m.tripId=t.tripId " +
+			"INNER JOIN Routes r ON t.RouteId=r.RouteId " +
+			"GROUP BY r.RouteId " +
+			"ORDER BY reservations " +
+			"LIMIT 5;";
+			
+		ResultSet topFiveLinesResults = statement.executeQuery(topFiveLinesSQL);
+		
+		out.print("<br/>Top Five Most Active Transit Lines <br/>");
+		while(topFiveLinesResults.next()){
+			out.print(topFiveLinesResults.getObject("routeName").toString() + "<br/>");
+		}
+			
 			}
 		} catch(Exception e){
 			out.print(e); //TODO: take this out once debugging is over
-			out.print("A database error occurred when fetching the top customer.");
+			out.print("A database error occurred");
 		}
 	%>
 	<form method="get" action="viewCustomers.jsp">
