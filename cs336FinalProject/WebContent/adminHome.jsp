@@ -37,7 +37,7 @@
 			
 			if(bestCustomerResults.next()){
 	%>
-		Best Customer: <%=bestCustomerResults.getObject("FirstName").toString() + " " + bestCustomerResults.getObject("LastName").toString() + " (" + bestCustomerResults.getObject("CustomerEmail").toString() + ")"%>
+	Best Customer: <%=bestCustomerResults.getObject("FirstName").toString() + " " + bestCustomerResults.getObject("LastName").toString() + " (" + bestCustomerResults.getObject("CustomerEmail").toString() + ")"%>
 	<%
 	
 		String topFiveLinesSQL = 
@@ -57,11 +57,53 @@
 		}
 			
 			}
+	%>
+	<form method="post" action="adminViewReservations.jsp">
+		Search Reservations by Route and Train Number<br/>
+		Route:
+		<select id="ddRoute" name="routeId">
+		<%
+			String routeSQL = "SELECT RouteId, name FROM Routes;";
+			ResultSet routeResults = statement.executeQuery(routeSQL);
+			
+			while(routeResults.next()){
+				out.print("<option value='" + routeResults.getInt("RouteId") + "'>" + routeResults.getString("name") + "</option>");
+			}
+		%>
+		</select>
+		<br/>
+		Train Number:
+		<select id="ddRoute" name="trainId">
+		<%
+			String trainSQL = "SELECT TrainId FROM Trains;";
+			ResultSet trainResults = statement.executeQuery(trainSQL);
+			
+			while(trainResults.next()){
+				out.print("<option value='" + trainResults.getInt("TrainId") + "'>" + trainResults.getInt("TrainId") + "</option>");
+			}
+		%>
+		</select>
+		<br/>
+		<input type="submit" value="Search" />
+	</form>
+	<br/>
+	<%
+		db.closeConnection(conn);
 		} catch(Exception e){
 			out.print(e); //TODO: take this out once debugging is over
 			out.print("A database error occurred");
 		}
 	%>
+	<br/>
+	<form method="post" action="adminViewReservations.jsp">
+		Search Reservations by Customer Name
+		<br/>
+		First Name: <input type="text" name="custFirstName"/>
+		<br/>
+		Last Name: <input type="text" name="custLastName"/>
+		<br/>
+		<input type="submit" value="Search" />
+	</form>
 	<form method="post" action="salesReport.jsp">
 		View Sales Report for 
 		<select id="ddSalesMonth" name="salesMonth">

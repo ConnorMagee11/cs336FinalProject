@@ -51,6 +51,8 @@
 			out.print(html);
 		}
 		
+		db.closeConnection(conn);
+		
 		}catch(Exception e){
 			out.print(e);
 		}
