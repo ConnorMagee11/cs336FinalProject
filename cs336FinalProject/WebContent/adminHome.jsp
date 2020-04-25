@@ -38,6 +38,7 @@
 			if(bestCustomerResults.next()){
 	%>
 	Best Customer: <%=bestCustomerResults.getObject("FirstName").toString() + " " + bestCustomerResults.getObject("LastName").toString() + " (" + bestCustomerResults.getObject("CustomerEmail").toString() + ")"%>
+	<br/>
 	<%
 	
 		String topFiveLinesSQL = 
@@ -58,6 +59,17 @@
 			
 			}
 	%>
+	<br/>
+	<form method="post" action="adminViewReservations.jsp">
+		Search Reservations by Customer Name
+		<br/>
+		First Name: <input type="text" name="custFirstName"/>
+		<br/>
+		Last Name: <input type="text" name="custLastName"/>
+		<br/>
+		<input type="submit" value="Search" />
+	</form>
+	<br/>
 	<form method="post" action="adminViewReservations.jsp">
 		Search Reservations by Route and Train Number<br/>
 		Route:
@@ -87,6 +99,34 @@
 		<input type="submit" value="Search" />
 	</form>
 	<br/>
+	<form method="post" action="listRevenue.jsp">
+		List Revenue for Route:
+		<select id="ddRoute2" name="routeId">
+		<%
+			ResultSet routeResults2 = statement.executeQuery(routeSQL);
+			while(routeResults2.next()){
+				out.print("<option value='" + routeResults2.getInt("RouteId") + "'>" + routeResults2.getString("name") + "</option>");
+			}
+		%>
+		</select>
+		<br/>
+		<input type="submit" value="Go" />
+	</form>
+	<br/>
+	<form method="post" action="listRevenue.jsp">
+		List Revenue for Destination City:
+		<select id="ddRoute2" name="stationId">
+		<%
+			String stationSQL = "SELECT StationId, City FROM Stations";
+			ResultSet stationResults = statement.executeQuery(stationSQL);
+			while(stationResults.next()){
+				out.print("<option value='" + stationResults.getInt("stationId") + "'>" + stationResults.getString("City") + "</option>");
+			}
+		%>
+		</select>
+		<br/>
+		<input type="submit" value="Go" />
+	</form>	
 	<%
 		db.closeConnection(conn);
 		} catch(Exception e){
@@ -95,15 +135,6 @@
 		}
 	%>
 	<br/>
-	<form method="post" action="adminViewReservations.jsp">
-		Search Reservations by Customer Name
-		<br/>
-		First Name: <input type="text" name="custFirstName"/>
-		<br/>
-		Last Name: <input type="text" name="custLastName"/>
-		<br/>
-		<input type="submit" value="Search" />
-	</form>
 	<form method="post" action="salesReport.jsp">
 		View Sales Report for 
 		<select id="ddSalesMonth" name="salesMonth">
@@ -121,12 +152,14 @@
 			<option value="12">December</option>
 		</select>
 		2020 
+		<br/>
 		<input type="submit" value="Go">
 	</form>
+	<br/>
 	<form method="get" action="viewCustomers.jsp">
 		<input type="submit" value="View All Customers">
 	</form>
-	
+	<br/>
 	<form method="get" action="viewEmployees.jsp">
 		<input type="submit" value="View All Employees">
 	</form>

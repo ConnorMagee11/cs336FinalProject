@@ -10,6 +10,7 @@
 <title>Administration - Customers</title>
 </head>
 <body>
+	<h2>Customers</h2>
 	<%
 		if(!session.getAttribute("username").equals("admin")){
 			response.sendRedirect("notAuthorized.jsp");
