@@ -11,6 +11,11 @@
 </head>
 <body>
 	<h2>Administration Home</h2>
+	
+	<form method="get" action="login.jsp?logoutSuccessful=1">
+		<input type="submit" value="Log Out">
+	</form>
+</body>
 
 	<%
 		//TODO: set null values pulled from db in forms to '' and when sending '' send NULL
