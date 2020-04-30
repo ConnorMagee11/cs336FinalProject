@@ -30,10 +30,6 @@
 			}else{
 				out.print("Login Successful!");
 				session.setAttribute("username", result.getObject("username"));
-				
-				if(session.getAttribute("username").equals("admin")){
-					response.sendRedirect("adminHome.jsp");
-				}
 			}
 			db.closeConnection(connection);
 			
