@@ -39,8 +39,12 @@
 			
 				db.closeConnection(conn);
 				
-				response.sendRedirect("login.jsp");
-			
+				if(session.getAttribute("username").equals("admin")){
+					response.sendRedirect("viewCustomers.jsp");
+				} else {
+					response.sendRedirect("login.jsp");
+				}
+				
 			} catch(Exception e){
 				out.print(e);
 			}
