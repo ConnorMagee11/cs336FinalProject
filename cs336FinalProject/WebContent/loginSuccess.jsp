@@ -32,10 +32,6 @@
 				session.setAttribute("username", result.getObject("username"));
 				session.setAttribute("password", result.getObject("password"));
 				
-				
-			////SNEHA 
-			
-			
 				String sql="select e.csrid, e.ssn from Employees e, SiteUsers s where e.username=s.username and s.username=e.username and s.Username='"+username+ "' and s.Password='"+password+"'";		
 				ResultSet table=sqlStatement.executeQuery(sql);
 				
@@ -43,8 +39,11 @@
 				{
 					session.setAttribute("CustomerRepresentativeSSN", table.getObject("ssn"));
 					response.sendRedirect("CustomerRepresentativeHomePage.jsp");
+				} else if(session.getAttribute("username").equals("admin")){
+					response.sendRedirect("adminHome.jsp");
+				}else{
+					response.sendRedirect("home.jsp");
 				}
-			////SNEHA 	
 			}
 			db.closeConnection(connection);
 			
