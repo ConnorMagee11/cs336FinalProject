@@ -40,7 +40,7 @@
 
 			Statement sqlStatement = connection.createStatement();
 			
-			String sqlText = "select distinct c.* from Customers c, Reservations r, Multivalue_Reservations_Trips m, Trips t, Routes ro where r.CustomerEmail=c.Email and r.Reservationid=m.Reservationid and m.Tripid=t.tripid and t.Routeid=ro.Routeid and ro.name='" + transitline + "' and t.Trainid='"+ train + "'";
+			String sqlText = "select distinct c.* from Customers c, Reservations r, Multivalue_Reservations_Trips m, Trips t, Routes ro where r.CustomerEmail=c.Email and r.Reservationid=m.Reservationid and m.Tripid=t.tripid and t.Routeid=ro.Routeid and ro.name='" + transitline + "' and t.Trainid='"+ train + "' and r.rtype!='Weekly' and r.rtype!='Monthly'";
 			ResultSet result = sqlStatement.executeQuery(sqlText);
 			
 			while(result.next()){
