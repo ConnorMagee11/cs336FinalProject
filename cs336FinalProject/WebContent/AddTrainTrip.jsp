@@ -78,8 +78,8 @@
 								   "'" + request.getParameter("editeconomy") + "', " +
 								   "'" + request.getParameter("editbusiness") + "', " +
 								   "'" + request.getParameter("editfirst") + "', " +
-								   "'" + request.getParameter("editroundtripdiscount") + "', " +
 								   "'" + request.getParameter("editecddiscount") + "', " +
+								   "'" + request.getParameter("editroundtripdiscount") + "', " +
 								   "'" + request.getParameter("editweeklydiscount") + "', " +
 								   "'" + request.getParameter("editmonthlydiscount") + "')";
 						statement.executeUpdate(tripupdate);
