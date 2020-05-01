@@ -16,6 +16,7 @@
 	<br/>
 
 	<%
+	//Changed on 4/30/2020 Sneha
 			ApplicationDB db = new ApplicationDB();
 			Connection connection = db.getConnection();
 			
@@ -83,7 +84,7 @@
 
 			Statement sqlStatement = connection.createStatement();
 			
-			String sqlText = "select distinct s2.*, s.*, r.name, t.trainid, t.StartTime, t.EndTime, TIMESTAMPDIFF(minute, t.starttime,t.endtime) from Stations s, Stations s2, Trips t, Routes r where s.stationid=t.destinationstationid and s2.stationid=t.sourcestationid and t.routeid=r.routeid and s.stationid='"+stationid+"'";
+			String sqlText = "select distinct s2.*, s.*, t.availableseats, t.economyfare, t.businessfare, t.firstfare, date_format(t.starttime,'%H:%i %p %m/%d/%Y') as starttime1, date_format(t.endtime,'%H:%i %p %m/%d/%Y') as endtime1, r.name, t.trainid, t.StartTime, t.EndTime, TIMESTAMPDIFF(minute, t.starttime,t.endtime) from Stations s, Stations s2, Trips t, Routes r where s.stationid=t.destinationstationid and s2.stationid=t.sourcestationid and t.routeid=r.routeid and s.stationid='"+stationid+"'";
 			ResultSet result = sqlStatement.executeQuery(sqlText);
 			
 			while(result.next()){
@@ -91,9 +92,11 @@
 						   "<td style='text-align:center'>" + result.getString("s2.StationName") +": " + result.getString("s2.city") + ", "+ result.getString("s2.state") + "</td>"
 							+"<td style='text-align:center'>" + result.getString("s.StationName") +": " + result.getString("s.city") + ", "+ result.getString("s.state") + "</td>"
 							+"<td style='text-align:center'>" + result.getObject("Name") + " #"+result.getObject("Trainid") +"</td>"
-							  +"<td style='text-align:center'>" + result.getObject("StartTime") + "</td>"
-							  +"<td style='text-align:center'>" + result.getObject("EndTime") + "</td>"
+							  +"<td style='text-align:center'>" + result.getObject("StartTime1") + "</td>"
+							  +"<td style='text-align:center'>" + result.getObject("EndTime1") + "</td>"
 							  +"<td style='text-align:center'>" + result.getObject("TIMESTAMPDIFF(minute, t.starttime,t.endtime)") + "</td>"
+									  +"<td style='text-align:center'>" + result.getObject("t.availableseats") + "</td>"
+									  +"<td style='text-align:center'>" + "E: $"+result.getObject("t.economyfare") + " B: $"+result.getObject("t.businessfare") + " F: $"+ result.getObject("t.firstfare") + "</td>"
 							  ;
 				out.println(html);
 			}
