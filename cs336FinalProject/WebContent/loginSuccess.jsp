@@ -30,6 +30,7 @@
 			}else{
 				out.print("Login Successful!");
 				session.setAttribute("username", result.getObject("username"));
+<<<<<<< HEAD
 				session.setAttribute("password", result.getObject("password"));
 				
 				
@@ -45,6 +46,8 @@
 					response.sendRedirect("CustomerRepresentativeHomePage.jsp");
 				}
 			////SNEHA 	
+=======
+>>>>>>> parent of 1dae52f... Compatibility Changes
 			}
 			db.closeConnection(connection);
 			
