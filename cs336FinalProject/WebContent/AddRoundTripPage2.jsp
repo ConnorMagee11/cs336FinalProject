@@ -93,7 +93,7 @@ Done!
 
 			Statement sqlStatement = connection.createStatement();
 			
-			String sqlText= "select distinct t.tripid, r.name, t.trainid, date_format(t.starttime,'%H:%i %p %d/%m/%Y') as starttime, date_format(t.endtime,'%H:%i %p %d/%m/%Y') as endtime, TIMESTAMPDIFF(minute, t.starttime,t.endtime), t.economyfare, t.businessfare, t.firstfare from Stations s, Stations s2, Trips t, Routes r where s2.stationid=t.sourcestationid and s.stationid=t.destinationstationid and " 
+			String sqlText= "select distinct t.tripid, r.name, t.trainid, date_format(t.starttime,'%H:%i %p %m/%d/%Y') as starttime, date_format(t.endtime,'%H:%i %p %m/%d/%Y') as endtime, TIMESTAMPDIFF(minute, t.starttime,t.endtime), t.economyfare, t.businessfare, t.firstfare from Stations s, Stations s2, Trips t, Routes r where s2.stationid=t.sourcestationid and s.stationid=t.destinationstationid and " 
 			+"t.routeid=r.routeid and s2.stationid='"+origin+"' and s.stationid='"+destination+"' and date(t.starttime)='"+date1+"' and t.availableseats>0";
 			ResultSet result = sqlStatement.executeQuery(sqlText);
 			%>
