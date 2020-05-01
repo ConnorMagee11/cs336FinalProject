@@ -21,6 +21,10 @@
 	</form>
 	<br/>
 	<% 
+	
+	//changed 4/30/2020 Sneha
+try
+	{
 	ApplicationDB db = new ApplicationDB();
 	Connection connection = db.getConnection();
 	String reservationid = request.getParameter("reservationid") == null ? "" : request.getParameter("reservationid");
@@ -2328,8 +2332,12 @@
 			
 //////////////			
 		}
-	
-	
+		db.closeConnection(connection);
+	}
+	catch (Exception e)
+	{
+		out.print("*ERROR: The train the customer was going to board has likely been cancelled.");
+	}
 	
 	
 	
@@ -2342,6 +2350,6 @@
 
 
 
-	<% db.closeConnection(connection);%>
+	
 </body>
 </html>
