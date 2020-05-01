@@ -126,7 +126,7 @@ Add Station: Add a new reservation for a customer.
 				Connection connection = db.getConnection();
 				Statement statement = connection.createStatement();
 				
-				ResultSet results = statement.executeQuery("select *,  date_format(reservationdate,'%H:%i %p %m/%d/%Y') as time from Reservations order by reservationid asc");
+				ResultSet results = statement.executeQuery("select *,  date_format(CONVERT_TZ(reservationdate, 'UTC',  'US/Eastern'),'%H:%i %p %m/%d/%Y') as time from Reservations order by reservationid asc");
 				
 				while(results.next()){
 					String html = "<tr>" + 
