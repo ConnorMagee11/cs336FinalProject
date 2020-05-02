@@ -43,6 +43,8 @@
 				{
 					session.setAttribute("CustomerRepresentativeSSN", table.getObject("ssn"));
 					response.sendRedirect("CustomerRepresentativeHomePage.jsp");
+				} else if(session.getAttribute("username").equals("admin")){
+					response.sendRedirect("adminHome.jsp");
 				}
 			////SNEHA 	
 			}
